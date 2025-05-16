@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+      nodejs: 18
+    commands:
+      - echo Installing dependencies...
+      - npm install -g yarn
+      - yarn install
+      - ./mvnw install -DskipTests
+  build:
+    commands:
+      - echo Building application...
+      - ./mvnw package -Pprod -DskipTests
+artifacts:
+  files:
+    - target/*.jar
+  discard-paths: yes
